@@ -1,0 +1,11 @@
+<%= form_with(model: [article, article.comments.build]) do |f| %>
+  <div class="mb-2">
+    <%= f.label :commenter, "お名前" %>
+    <%= f.text_field :commenter, class: "form-control" %>
+  </div>
+  <div class="mb-2">
+    <%= f.label :body, "コメント" %>
+    <%= f.text_area :body, rows: 4, class: "form-control" %>
+  </div>
+  <%= f.submit "コメントする", class: "btn btn-primary" %>
+<% end %>
