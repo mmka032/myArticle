@@ -87,4 +87,10 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # 管理画面用 Basic 認証
+  config.x.admin_basic_auth = {
+    user: "admin",
+    password: "password123"
+  }
 end

@@ -1,37 +1,28 @@
 <div class="container mt-4">
-  <% provide :title, "記事一覧" %>
-  <h1>記事一覧</h1>
+
+  <% provide :title, "ユーザー一覧" %>
+
+  <h1 class="mb-3">ユーザー一覧</h1>
+
   <table class="table table-hover table-striped table-bordered shadow rounded overflow-hidden align-middle">
-    <thead class="table-dark text-center text-uppercase custom-thead">
+    <thead class="table-light text-center text-uppercase">
       <tr>
-        <th style="width: 15%;">タイトル</th>
-        <th class="d-none d-md-table-cell" style="width: 12%;">投稿者</th>
-        <th class="d-none d-md-table-cell" style="width: 15%;">概要</th>
-        <th style="width: 38%;">本文</th>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 40%;">Email</th>
+        <th style="width: 30%;">登録日</th>
         <th style="width: 20%;">操作</th>
       </tr>
     </thead>
+
     <tbody>
-      <% @articles.each do |article| %>
+      <% @users.each do |user| %>
         <tr>
-          <td><%= article.title %></td>
-          <td class="d-none d-md-table-cell">
-            <%= article.user ? article.user.email.split('@').first : '（不明）' %>
-          </td>
-          <td class="d-none d-md-table-cell"><%= truncate(article.summary, length: 10) %></td>
-          <td><%= truncate(article.body, length: 25) %></td>
+          <td class="text-center"><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td class="text-center"><%= user.created_at.strftime("%Y-%m-%d") %></td>
           <td class="text-center">
-            <div class="d-inline-flex gap-2">
-              <%= link_to article, class: "btn btn-sm btn-outline-primary" do %>
-                <i class="bi bi-eye"></i> 表示
-              <% end %>
-              <%= link_to edit_article_path(article), class: "btn btn-sm btn-outline-warning" do %>
-                <i class="bi bi-pencil"></i> 編集
-              <% end %>
-              <%= link_to article, data: { turbo_method: :delete, turbo_confirm: "削除してよろしいですか？" }, class: "btn btn-sm btn-outline-danger" do %>
-                <i class="bi bi-trash"></i> 削除
-              <% end %>
-            </div>
+            <%= link_to "詳細", admin_user_path(user),
+                        class: "btn btn-sm btn-outline-primary" %>
           </td>
         </tr>
       <% end %>
